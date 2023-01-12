@@ -32,9 +32,9 @@ func ReadFile() []string {
 	return scanLines //get lines
 }
 
-func ParsData (scan []string) (int, Cell, Cell, []Cell, []string) {
-	var start Cell
-	var end Cell
+func ParsData (scan []string) (int, *Cell, *Cell, []Cell, []string) {
+	var start *Cell
+	var end *Cell
 	var cellsArr []Cell
 	var tunArr [] string
 	nSt := scan[0]
@@ -57,7 +57,7 @@ func ParsData (scan []string) (int, Cell, Cell, []Cell, []string) {
 			end = CreateCells(scan[i+1])
 		} else if len(foundCells)>0 && scan[i] == foundCells[0] {
 			eachCell := CreateCells(scan[i])
-			cellsArr = append(cellsArr, eachCell)
+			cellsArr = append(cellsArr, *eachCell)
 		} else if len(foundTunells)>0 && scan[i] == foundTunells[0] {
 			tunArr = append(tunArr, scan[i])
 		} 

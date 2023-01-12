@@ -33,10 +33,10 @@ func bildCell(cellsName, tun) []Cell {
 }
 */
 
-func CreateCells (line string) Cell {
+func CreateCells (line string) *Cell {
 	l := strings.Split(line, " ")		
 	cell := Cell{Name: l[0]}
-return cell
+return &cell
 }
 
 	
