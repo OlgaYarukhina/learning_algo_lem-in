@@ -44,8 +44,8 @@ func ParsData (scan []string) (int, string, string, []string, []string) {
 		os.Exit(1)
 	}
 
-	regexpCells := regexp.MustCompile(`(\S+)\s(\d\s\d)`)
-	regexpTunells := regexp.MustCompile(`(\S+)-(\S)`)
+	regexpCells := regexp.MustCompile(`(\S+)\s(\d+\s\d+)`)
+	regexpTunells := regexp.MustCompile(`(\S+)-(\S+)`)
 	
 
 	for i:=1; i < len(scan); i++ {
@@ -61,10 +61,8 @@ func ParsData (scan []string) (int, string, string, []string, []string) {
 			l := strings.Split(scan[i], " ")
 			cellsArr = append(cellsArr, l[0])
 		} else if len(foundTunells)>0 && scan[i] == foundTunells[0] {
-			l := strings.Split(scan[i], " ")
-			tunArr = append(tunArr, l[0])
+			tunArr = append(tunArr, scan[i])
 		} 
-
 	}
 
 	return n, start, end, cellsArr, tunArr

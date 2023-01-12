@@ -11,15 +11,15 @@ func main(){
 	
 	getData := functions.ReadFile() 
 	n, start, end, cellsName, tun := functions.ParsData(getData)
+	//functions.BildCave(start, end, cellsName, tun)
+	cells := functions.FindTunels(tun, cellsName)
 
-
-	fmt.Println(getData[2])
 
 	fmt.Println(n)
 	fmt.Println(start)
 	fmt.Println(end)
-	fmt.Println(cellsName)
-	fmt.Println(tun)
+	fmt.Println(cells)
+	
 	
 	
 
