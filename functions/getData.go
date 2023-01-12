@@ -6,8 +6,8 @@ import (
 	"os"
 	"regexp"
 	"strconv"
-	"strings"
 )
+
 
 
 func ReadFile() []string {
@@ -32,10 +32,10 @@ func ReadFile() []string {
 	return scanLines //get lines
 }
 
-func ParsData (scan []string) (int, string, string, []string, []string) {
-	var start string
-	var end string
-	var cellsArr []string 
+func ParsData (scan []string) (int, Cell, Cell, []Cell, []string) {
+	var start Cell
+	var end Cell
+	var cellsArr []Cell
 	var tunArr [] string
 	nSt := scan[0]
 	n, err := strconv.Atoi(nSt)
@@ -52,14 +52,12 @@ func ParsData (scan []string) (int, string, string, []string, []string) {
 		foundCells := regexpCells.FindAllString(scan[i], -1)
 		foundTunells := regexpTunells.FindAllString(scan[i], -1)
 		if scan[i] == "##start"{
-			l := strings.Split(scan[i+1], " ")
-			start = l[0]
+			start = CreateCells(scan[i+1])
 		} else if scan[i] == "##end" {
-			l := strings.Split(scan[i+1], " ")
-			end = l[0]
+			end = CreateCells(scan[i+1])
 		} else if len(foundCells)>0 && scan[i] == foundCells[0] {
-			l := strings.Split(scan[i], " ")
-			cellsArr = append(cellsArr, l[0])
+			eachCell := CreateCells(scan[i])
+			cellsArr = append(cellsArr, eachCell)
 		} else if len(foundTunells)>0 && scan[i] == foundTunells[0] {
 			tunArr = append(tunArr, scan[i])
 		} 

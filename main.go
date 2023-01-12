@@ -10,9 +10,11 @@ func main(){
 
 	
 	getData := functions.ReadFile() 
-	n, start, end, cellsName, tun := functions.ParsData(getData)
+	n, start, end, allCells, tun := functions.ParsData(getData)
 	//functions.BildCave(start, end, cellsName, tun)
-	cells := functions.FindTunels(tun, cellsName)
+	for _, eachCell := cellsName {
+		cell := CreateCells (eachCell, tun)
+	}
 
 
 	fmt.Println(n)

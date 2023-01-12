@@ -2,13 +2,12 @@ package functions
 
 import (
 	"fmt"
-	"regexp"
 	"strings"
 )
 
 type Cell struct {
 	Name   string
-	Tunels [] *Cell
+	Tunnels [] *Cell
 }
 
 
@@ -17,6 +16,9 @@ type AntHill struct {
 	End   *Cell
 	Cells []Cell
 }
+
+var Data Cell
+
 /*
 func BildCave (start string, end string) {
 	Cave := AntHill {
@@ -31,10 +33,14 @@ func bildCell(cellsName, tun) []Cell {
 }
 */
 
-func FindTunels (tunArr []string, names []string) {
-	//var cell []Cell
-	var s []*Cell
+func CreateCells (line string) Cell {
+	l := strings.Split(line, " ")		
+	cell := Cell{Name: l[0]}
+return cell
+}
+
 	
+func CreateTunn () {
 	cellList:= make (map[string][]*Cell)
 
 
@@ -43,7 +49,8 @@ func FindTunels (tunArr []string, names []string) {
 		w1, w2:= t[0], t[1]
 		for j:=0; j<len(names); j++ {
 			if names[i] == t[0] {
-				s = append(s, &w2)
+				var s []*Cell
+				s = append(s, *w2)
 			}
 			cellList[w1] = s
 		}
