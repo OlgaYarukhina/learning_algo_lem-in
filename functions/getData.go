@@ -6,9 +6,20 @@ import (
 	"os"
 	"regexp"
 	"strconv"
+	"strings"
 )
 
+type Cell struct {
+	Name   string
+	Tunnels [] *Cell
+}
 
+
+type AntHill struct {
+	Start *Cell
+	End   *Cell
+	Cells []Cell
+}
 
 func ReadFile() []string {
 
@@ -32,7 +43,8 @@ func ReadFile() []string {
 	return scanLines //get lines
 }
 
-func ParsData (scan []string) (int, *Cell, *Cell, []Cell, []string) {
+func ParsData (scan []string) (int, *Cell, *Cell, []Cell) {
+	var allCells []Cell
 	var start *Cell
 	var end *Cell
 	var cellsArr []Cell
@@ -51,26 +63,45 @@ func ParsData (scan []string) (int, *Cell, *Cell, []Cell, []string) {
 	for i:=1; i < len(scan); i++ {
 		foundCells := regexpCells.FindAllString(scan[i], -1)
 		foundTunells := regexpTunells.FindAllString(scan[i], -1)
-		if scan[i] == "##start"{
-			start = CreateCells(scan[i+1])
-		} else if scan[i] == "##end" {
-			end = CreateCells(scan[i+1])
-		} else if len(foundCells)>0 && scan[i] == foundCells[0] {
-			eachCell := CreateCells(scan[i])
-			cellsArr = append(cellsArr, *eachCell)
+		if len(foundCells)>0 && scan[i] == foundCells[0] {
+			l := strings.Split(scan[i], " ")
+			cell := Cell{Name: l[0]}
+			cellsArr = append(cellsArr, cell)
+			if scan[i-1] == "##start"{
+			   start := &cell
+			   fmt.Println(&cell)
+			   fmt.Println(&start)
+			   fmt.Println(cell)
+			   fmt.Println(start)
+			} else if scan[i-1] == "##end" {
+				end = &cell
+			} 
 		} else if len(foundTunells)>0 && scan[i] == foundTunells[0] {
 			tunArr = append(tunArr, scan[i])
 		} 
 	}
+	for _, each := range tunArr { //add tunnels
+		allCells = AddTunnels(cellsArr, each)
+		cellsArr = allCells
+	}
 
-	return n, start, end, cellsArr, tunArr
-
+	return n, start, end, cellsArr
 }
-/*
-func WriteToNewFile(d []byte) {
-	newFile := ioutil.WriteFile(os.Args[2], d, 0600) //0777
-	if newFile != nil {
-		fmt.Println("Unable to create file:\n")
+
+	
+func AddTunnels (c []Cell, t string) []Cell {
+	tn := strings.Split(t, "-")
+		w1, w2:= tn[0], tn[1]
+	for i:=0; i<len(c); i++ {
+		if c[i].Name == w1 {
+			fmt.Println(c[i])
+		for j:=0; j<len(c); j++ {
+			if c[j].Name == w2 {
+				c[i].Tunnels = append(c[i].Tunnels, &c[j])
+				c[j].Tunnels = append(c[j].Tunnels, &c[i])
+			}
+		}
 	}
 }
-*/
+return c
+}
