@@ -45,10 +45,10 @@ func ReadFile() []string {
 
 func ParsData (scan []string) (int, *Cell, *Cell, []Cell) {
 	var allCells []Cell
-	var start *Cell
-	var end *Cell
+	var start, end *Cell
 	var cellsArr []Cell
 	var tunArr [] string
+	var st, fn string
 	nSt := scan[0]
 	n, err := strconv.Atoi(nSt)
 	if err != nil {
@@ -68,13 +68,11 @@ func ParsData (scan []string) (int, *Cell, *Cell, []Cell) {
 			cell := Cell{Name: l[0]}
 			cellsArr = append(cellsArr, cell)
 			if scan[i-1] == "##start"{
-			   start := &cell
-			   fmt.Println(&cell)
-			   fmt.Println(&start)
-			   fmt.Println(cell)
-			   fmt.Println(start)
+				l := strings.Split(scan[i], " ")
+				st = l[0]
 			} else if scan[i-1] == "##end" {
-				end = &cell
+				l := strings.Split(scan[i], " ")
+				fn = l[0]
 			} 
 		} else if len(foundTunells)>0 && scan[i] == foundTunells[0] {
 			tunArr = append(tunArr, scan[i])
@@ -83,6 +81,14 @@ func ParsData (scan []string) (int, *Cell, *Cell, []Cell) {
 	for _, each := range tunArr { //add tunnels
 		allCells = AddTunnels(cellsArr, each)
 		cellsArr = allCells
+	}
+
+	for i, each := range cellsArr {
+		if each.Name == st {
+			start = &cellsArr[i]
+		} else if each.Name == fn {
+			end = &cellsArr[i]
+		}
 	}
 
 	return n, start, end, cellsArr
