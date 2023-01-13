@@ -1,7 +1,6 @@
 package functions
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -17,7 +16,8 @@ type AntHill struct {
 	Cells []Cell
 }
 
-var Data Cell
+
+
 
 /*
 func BildCave (start string, end string) {
@@ -39,25 +39,20 @@ func CreateCells (line string) *Cell {
 return &cell
 }
 
+
 	
-func CreateTunn () {
-	cellList:= make (map[string][]*Cell)
-
-
-	for i:=0; i<len(tunArr); i++ {
-		t := strings.Split(tunArr[i], "-")
-		w1, w2:= t[0], t[1]
-		for j:=0; j<len(names); j++ {
-			if names[i] == t[0] {
-				var s []*Cell
-				s = append(s, *w2)
+func AddTunnels (c []Cell, t string) []Cell {
+	tn := strings.Split(t, "-")
+		w1, w2:= tn[0], tn[1]
+	for i:=0; i<len(c); i++ {
+		if c[i].Name == w1 {
+		for j:=0; j<len(c); j++ {
+			if c[j].Name == w2 {
+				c[i].Tunnels = append(c[i].Tunnels, &c[j])
+				c[j].Tunnels = append(c[j].Tunnels, &c[i])
 			}
-			cellList[w1] = s
 		}
-
 	}
-	fmt.Println(names)
-	fmt.Println(tunArr)
-
-
+}
+return c
 }

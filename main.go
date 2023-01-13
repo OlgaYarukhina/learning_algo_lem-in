@@ -8,19 +8,24 @@ import (
 
 func main(){
 
+	var allCells []functions.Cell
 	
 	getData := functions.ReadFile() 
-	n, start, end, allCells, tun := functions.ParsData(getData)
-	//functions.BildCave(start, end, cellsName, tun)
-	for _, eachCell := cellsName {
-		cell := CreateCells (eachCell, tun)
+	n, start, end, cells, tun := functions.ParsData(getData)
+	
+	for _, each := range tun {
+		allCells = functions.AddTunnels(cells, each)
+		cells = allCells
 	}
+	
 
 
 	fmt.Println(n)
 	fmt.Println(start)
 	fmt.Println(end)
-	fmt.Println(cells)
+	fmt.Println(allCells)
+	
+	
 	
 	
 	
