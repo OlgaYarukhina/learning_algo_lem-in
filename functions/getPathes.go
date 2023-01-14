@@ -2,45 +2,55 @@ package functions
 
 import "fmt"
 
-func BildAllPaths(s ,f *Cell)[][]*Cell{
+func BildAllPaths(s ,f *Cell, c []*Cell) ([][]*Cell){
 	var p [][]*Cell
 	var eachP []*Cell
+	var allp [][] *Cell
 
-	for i:=0; i<len(s.Tunnels); i++ {
-		step := s.Tunnels[i]
-		eachP = append(eachP, step)
-		fmt.Println("Each:")
-		fmt.Println(eachP)
-		if s.Tunnels[i] == f {
+	eachP = c
+	eachP = append(eachP, s)
+
+
+	
+Label:
+		for i:=0; i<len(s.Tunnels); i++ {
+			fmt.Println(i)
+			if s.Tunnels[i] == f {
+			eachP = append(eachP, s.Tunnels[i])
+			
 			break
-		} else {
-		nextStep := bildPath(step, f)
-		eachP = append(eachP, nextStep...)
+		   } else {
+			for j:= 0; j<len(eachP); j++ {   //check if we have already been in that cell
+			fmt.Println("Here1")
+	        if eachP[j] == s.Tunnels[i] {
+				fmt.Println(eachP[j])
+				fmt.Println(s.Tunnels[i])
+				continue Label
+			} 
+			}	
+			fmt.Println("Here2")
+			fmt.Println(s.Tunnels[i])
+			nextStep := BildAllPaths(s.Tunnels[i], f, eachP)
+			
+			fmt.Println("nextStep:")
+			fmt.Println(nextStep)
+			allp = append(allp, nextStep...)
+
 		}
 	}
 
-	p = append(p, eachP)
+	p = append(p, allp...)
 	
 	return p
 }
 
-func bildPath (s ,f *Cell)[]*Cell{
-	var eachP []*Cell
-	eachP = append(eachP, s) //+2
-	fmt.Println("Each2:")
-		fmt.Println(eachP)
-	for i:=0; i<len(s.Tunnels); i++ {
-		step := s.Tunnels[i] // +3
-		eachP = append(eachP, step)
-		if s.Tunnels[i] == f {
-			eachP = append(eachP, step)
-			break
-		} else if s.Tunnels[i] == {
-			break
-		}else {
-		nextStep := bildPath(step, f)
-		eachP = append(eachP, nextStep...)
-		}
-	}
+
+/*
+func bildPath (s ,f *Cell, p []*Cell)[][]*Cell{
+	eachP := p
+
+
 return eachP
 }
+*/
+

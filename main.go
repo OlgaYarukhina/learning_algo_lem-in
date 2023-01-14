@@ -16,19 +16,15 @@ func main(){
 	n, start, end, cells:= functions.ParsData(getData)
 
 	fmt.Println(n)
-	fmt.Print("start:")
-	fmt.Println(start)
-	fmt.Print("end:")
-	fmt.Println(end)
-	fmt.Println(cells)
 	fmt.Println(cells[0].Tunnels[0])	
-	fmt.Println(cells[0].Tunnels[0].Tunnels[1])	
 
 
 	// 2. create Path
 
+ var c []*functions.Cell
 
-	path := functions.BildAllPaths(start, end)
+	path := functions.BildAllPaths(start, end, c)
+	fmt.Println("Arr of pathes:")
 	fmt.Println(path)
 	
 	

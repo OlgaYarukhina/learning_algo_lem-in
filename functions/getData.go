@@ -100,7 +100,6 @@ func AddTunnels (c []Cell, t string) []Cell {
 		w1, w2:= tn[0], tn[1]
 	for i:=0; i<len(c); i++ {
 		if c[i].Name == w1 {
-			fmt.Println(c[i])
 		for j:=0; j<len(c); j++ {
 			if c[j].Name == w2 {
 				c[i].Tunnels = append(c[i].Tunnels, &c[j])
