@@ -9,6 +9,7 @@ func BildAllPaths(s ,f *Cell, c []*Cell) ([][]*Cell){
 
 	eachP = c
 	eachP = append(eachP, s)
+	fmt.Println(eachP)
 
 
 	
@@ -17,6 +18,8 @@ Label:
 			fmt.Println(i)
 			if s.Tunnels[i] == f {
 			eachP = append(eachP, s.Tunnels[i])
+			allp = append(allp, eachP)
+			fmt.Println(allp)
 			
 			break
 		   } else {
