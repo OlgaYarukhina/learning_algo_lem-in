@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 
 	"01.kood.tech/git/oyarukhi/lem-in/functions"
 )
@@ -23,7 +24,7 @@ func main(){
 
 	// 2. create Path
 
- var c []*functions.Cell
+    var c []*functions.Cell
 
 	path := functions.BildAllPaths(start, end, c)
 	fmt.Println("Arr of pathes:")
@@ -35,6 +36,13 @@ func main(){
 		}
 		
 	}
-	
 
+	// 3. strategy
+	
+	allSollution := functions.BildAllSolution(path)
+	
+	sort.Slice(path, func(i, j int) bool {
+		return len(path[i]) < len(path[j])
+	})
+		fmt.Println(allSollution)
 }

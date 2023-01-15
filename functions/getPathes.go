@@ -1,5 +1,10 @@
 package functions
 
+import (
+	
+	"sort"
+)
+
 
 func BildAllPaths(s ,f *Cell, c []*Cell) ([][]*Cell){
 	var p, allp [][]*Cell
@@ -27,6 +32,17 @@ Label:
 	return p
 }
 
+
+func BildAllSolution (p [][]*Cell) ([][]*Cell) {
+	srtd := p
+	sort.Slice(srtd, func(i, j int) bool {
+		return len(srtd[i]) < len(srtd[j])
+	})
+
+
+	
+	return s
+}
 
 /*
 func bildPath (s ,f *Cell, p []*Cell)[][]*Cell{
