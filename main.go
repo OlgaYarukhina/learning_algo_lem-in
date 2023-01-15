@@ -26,7 +26,7 @@ func main(){
 
     var c []*functions.Cell
 
-	path := functions.BildAllPaths(start, end, c)
+	path := functions.AllPaths(start, end, c)
 	fmt.Println("Arr of pathes:")
 	fmt.Println(path)
 	for _, r := range path {
@@ -39,10 +39,10 @@ func main(){
 
 	// 3. strategy
 	
-	allSollution := functions.BildAllSolution(path)
+	allSollutions := functions.AllSolutions(path)
 	
 	sort.Slice(path, func(i, j int) bool {
 		return len(path[i]) < len(path[j])
 	})
-		fmt.Println(allSollution)
+		fmt.Println(allSollutions)
 }
