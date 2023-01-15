@@ -48,24 +48,19 @@ func AllSolutions(p [][]*Cell) ([][][]*Cell) {
 	for i:=1; i<len(srtd); i++ {
 		for j:=1; j<len(srtd[i]); j++{ //without start and finish
 			check := false
-			for k:=0; k<len(ar); k++ {
-				
+			for k:=0; k<len(ar); k++ {		
 				for _, cell := range ar[k]{
 				if cell == srtd[i][j] && cell != srtd[i][0] && cell != srtd[i][len(srtd[i])-1] {
 					check = true
 					continue Lable
-					
 				}		
 				}
-				
 				}	
 				if check == false {
 					ar = append(ar, srtd[i])
 			}
 		}
-	}
-		
-
+	}	
 	fmt.Println(ar)
 	return sol
 }
