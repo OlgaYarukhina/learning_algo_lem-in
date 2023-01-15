@@ -18,6 +18,8 @@ func main(){
 	fmt.Println(n)
 	fmt.Println(cells[0].Tunnels[0])	
 
+	fmt.Println(cells)
+
 
 	// 2. create Path
 
@@ -26,9 +28,13 @@ func main(){
 	path := functions.BildAllPaths(start, end, c)
 	fmt.Println("Arr of pathes:")
 	fmt.Println(path)
-	
-	
-	
+	for _, r := range path {
+		fmt.Println("next")
+		for _, g := range r{
+			fmt.Println(g)
+		}
+		
+	}
 	
 
 }
