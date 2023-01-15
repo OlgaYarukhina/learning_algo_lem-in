@@ -3,9 +3,8 @@ package functions
 import "fmt"
 
 func BildAllPaths(s ,f *Cell, c []*Cell) ([][]*Cell){
-	var p [][]*Cell
+	var p, allp [][]*Cell
 	var eachP []*Cell
-	var allp [][] *Cell
 	eachP = c
 	eachP = append(eachP, s)
 
@@ -15,8 +14,7 @@ Label:
 			eachP = append(eachP, s.Tunnels[i])
 			allp = append(allp, eachP)
 			continue
-
-		   } else {
+		    } else {
 			for j:= 0; j<len(eachP); j++ {   //check if we have already been in that cell
 			fmt.Println("Here1")
 	        if eachP[j] == s.Tunnels[i] {
