@@ -1,6 +1,5 @@
 package functions
 
-import "fmt"
 
 func BildAllPaths(s ,f *Cell, c []*Cell) ([][]*Cell){
 	var p, allp [][]*Cell
@@ -16,7 +15,6 @@ Label:
 			continue
 		    } else {
 			for j:= 0; j<len(eachP); j++ {   //check if we have already been in that cell
-			fmt.Println("Here1")
 	        if eachP[j] == s.Tunnels[i] {
 				continue Label
 			} 
