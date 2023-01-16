@@ -37,6 +37,7 @@ func AllPaths(s ,f *Cell, c []*Cell) ([][]*Cell){
 func AllSolutions(p [][]*Cell) ([][][]*Cell) {
 	var sol [][][]*Cell
 	var ar [][]*Cell
+	check := false
 	srtd := p
 	
 	sort.Slice(srtd, func(i, j int) bool {
@@ -51,12 +52,16 @@ func AllSolutions(p [][]*Cell) ([][][]*Cell) {
 	fmt.Println(srtd[0][1])
 
 
+	
+
+
 	Lable:
 	for i:=1; i<len(srtd); i++ {
 		//fmt.Println(i)
 		//fmt.Println(srtd[i])
-		check := false
+	
 		for j:=1; j<len(srtd[i]); j++{ 
+			check = false 
 			//fmt.Println(srtd[i][j])
 			for k:=0; k<len(ar); k++ {		
 				for _, cell := range ar[k]{
@@ -70,14 +75,12 @@ func AllSolutions(p [][]*Cell) ([][][]*Cell) {
 					}		
 				}
 				}	
-				if check == false {
-					ar = append(ar, srtd[i])
-					fmt.Println("arr")
-						fmt.Println(ar)
-			}
-		
-
 		}
+		if check == false {
+			ar = append(ar, srtd[i])
+			fmt.Println("arr")
+				fmt.Println(ar)
+	}
 	}	
 	fmt.Println("Good:")
 fmt.Println(ar) //ways without bottle
