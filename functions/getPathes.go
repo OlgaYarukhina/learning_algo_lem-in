@@ -2,7 +2,6 @@ package functions
 
 import (
 	"fmt"
-	"sort"
 )
 
 
@@ -12,7 +11,7 @@ func AllPaths(s ,f *Cell, c []*Cell) ([][]*Cell){
 	eachP = c
 	eachP = append(eachP, s)
 
-	Label:
+	lable:
 	for i:=0; i<len(s.Tunnels); i++ {
 		eachPP := eachP
 		if s.Tunnels[i] == f {
@@ -22,7 +21,7 @@ func AllPaths(s ,f *Cell, c []*Cell) ([][]*Cell){
 		} else {
 		for j:= 0; j<len(eachP); j++ {   //check if we have already been in that cell
 	    if eachP[j] == s.Tunnels[i] {
-		continue Label
+		continue lable
 		} 
 		}	
 		nextStep := AllPaths(s.Tunnels[i], f, eachP)
@@ -36,54 +35,45 @@ func AllPaths(s ,f *Cell, c []*Cell) ([][]*Cell){
 
 func AllSolutions(p [][]*Cell) ([][][]*Cell) {
 	var sol [][][]*Cell
-	var ar [][]*Cell
-	check := false
-	srtd := p
 	
-	sort.Slice(srtd, func(i, j int) bool {
-		return len(srtd[i]) < len(srtd[j])
-	})
+	var check bool
+	allp := p
 
-	
-	ar = append(ar, srtd[0])
-	sol = append(sol, ar)
-	fmt.Println(ar)
-	fmt.Print("here")
-	fmt.Println(srtd[0][1])
+	for w := 0; w < (len(allp)); w++ {
+		var passedCelles []*Cell 
+		var str [][]*Cell
 
+		str = append(str, allp[w])
+		sol = append(sol, str)
 
-	
+		for _, allcell := range allp[w] {
+			passedCelles = append(passedCelles, allcell)
+		}
 
-
-	Lable:
-	for i:=1; i<len(srtd); i++ {
-		//fmt.Println(i)
-		//fmt.Println(srtd[i])
-	
-		for j:=1; j<len(srtd[i]); j++{ 
-			check = false 
-			//fmt.Println(srtd[i][j])
-			for k:=0; k<len(ar); k++ {		
-				for _, cell := range ar[k]{
-				if cell == srtd[i][j] && cell != srtd[0][0] && cell != srtd[0][len(srtd[0])-1] { //without start and finish
-					fmt.Println("here1")
-					fmt.Println(srtd[i][j])
-					fmt.Println(srtd[0][0])
-					fmt.Println(srtd[0][len(srtd[0])-1] )
+     lable:
+		for r := w+1; r<len(allp); r++{ 
+			for k:=0; k<len(allp[r]); k++ {		
+				check = false 
+				for _, cell := range passedCelles {
+					if cell == allp[r][k] && cell != allp[0][0] && cell != allp[0][len(allp[0])-1] { //without start and finish
 					check = true
-					continue Lable
+					continue lable
 					}		
 				}
-				}	
+			}	
+			if !check {
+				str = append(str, allp[w+1])
+				sol = append(sol, str)
+			for _, allcell := range allp[r] {
+				passedCelles = append(passedCelles, allcell)
+			}
 		}
-		if check == false {
-			ar = append(ar, srtd[i])
-			fmt.Println("arr")
-				fmt.Println(ar)
+	
 	}
-	}	
+	}
+	
 	fmt.Println("Good:")
-fmt.Println(ar) //ways without bottle
+ //ways without bottle
 	return sol
 }
 
@@ -95,5 +85,10 @@ func bildPath (s ,f *Cell, p []*Cell)[][]*Cell{
 return eachP
  && cell != srtd[i][0] && cell != srtd[i][len(srtd[i])-1] 
 }
+
+
+sort.Slice(srtd, func(i, j int) bool {
+		return len(srtd[i]) < len(srtd[j])
+	})
 */
 
