@@ -40,6 +40,8 @@ func AllSolutions(p [][]*Cell) ([][][]*Cell) {
 	allp := p
 
 	for w := 0; w < (len(allp)); w++ {
+		fmt.Print("w")
+		fmt.Println(w)
 		var passedCelles []*Cell 
 		var str [][]*Cell
 
@@ -49,9 +51,11 @@ func AllSolutions(p [][]*Cell) ([][][]*Cell) {
 		for _, allcell := range allp[w] {
 			passedCelles = append(passedCelles, allcell)
 		}
+		fmt.Println(passedCelles)
 
      lable:
 		for r := w+1; r<len(allp); r++{ 
+			fmt.Println(r)
 			for k:=0; k<len(allp[r]); k++ {		
 				check = false 
 				for _, cell := range passedCelles {
@@ -62,11 +66,12 @@ func AllSolutions(p [][]*Cell) ([][][]*Cell) {
 				}
 			}	
 			if !check {
-				str = append(str, allp[w+1])
+				str = append(str, allp[r])
 				sol = append(sol, str)
 			for _, allcell := range allp[r] {
 				passedCelles = append(passedCelles, allcell)
 			}
+			fmt.Println(passedCelles)
 		}
 	
 	}
