@@ -13,21 +13,26 @@ func main(){
 	getData := functions.ReadFile() 
 	n, start, end, cells:= functions.ParsData(getData)
 
-	fmt.Println(n)
 	fmt.Println(cells)	
 
-	// 2. create Path
+	// 2. create all possible pathes
 
     var c []*functions.Cell
 	path := functions.AllPaths(start, end, c)
 
-
-	// 3. strategy
+	// 3. strategies
 	
 	allSollutions := functions.AllSolutions(path)
-	fmt.Println("All strutegies:")
-			fmt.Println(allSollutions)
+
+	// 4. choose best solution
+
+	solPath := functions.GetSolution(n,allSollutions)
+	fmt.Println("Best solution")
+			fmt.Println(solPath)
 }
+
+
+
 
 
 /*
