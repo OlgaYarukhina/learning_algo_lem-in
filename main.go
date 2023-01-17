@@ -22,12 +22,11 @@ func main(){
 	path := functions.AllPaths(start, end, c)
 
 
-
 	// 3. strategy
 	
-allSollutions := functions.AllSolutions(path)
-fmt.Println("Need:")
-		fmt.Println(allSollutions)
+	allSollutions := functions.AllSolutions(path)
+	fmt.Println("All strutegies:")
+			fmt.Println(allSollutions)
 }
 
 

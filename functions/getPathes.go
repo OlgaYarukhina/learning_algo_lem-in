@@ -73,27 +73,9 @@ func AllSolutions(p [][]*Cell) ([][][]*Cell) {
 			}
 			fmt.Println(passedCelles)
 		}
-	
 	}
 	}
-	
-	fmt.Println("Good:")
- //ways without bottle
 	return sol
 }
 
-/*
-func bildPath (s ,f *Cell, p []*Cell)[][]*Cell{
-	eachP := p
-
-
-return eachP
- && cell != srtd[i][0] && cell != srtd[i][len(srtd[i])-1] 
-}
-
-
-sort.Slice(srtd, func(i, j int) bool {
-		return len(srtd[i]) < len(srtd[j])
-	})
-*/
 
