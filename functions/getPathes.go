@@ -35,13 +35,11 @@ func AllPaths(s ,f *Cell, c []*Cell) ([][]*Cell){
 
 func AllSolutions(p [][]*Cell) ([][][]*Cell) {
 	var sol [][][]*Cell
-	
 	var check bool
+	
 	allp := p
 
 	for w := 0; w < (len(allp)); w++ {
-		fmt.Print("w")
-		fmt.Println(w)
 		var passedCelles []*Cell 
 		var str [][]*Cell
 
@@ -51,7 +49,6 @@ func AllSolutions(p [][]*Cell) ([][][]*Cell) {
 		for _, allcell := range allp[w] {
 			passedCelles = append(passedCelles, allcell)
 		}
-		fmt.Println(passedCelles)
 
      lable:
 		for r := w+1; r<len(allp); r++{ 
@@ -71,7 +68,6 @@ func AllSolutions(p [][]*Cell) ([][][]*Cell) {
 			for _, allcell := range allp[r] {
 				passedCelles = append(passedCelles, allcell)
 			}
-			fmt.Println(passedCelles)
 		}
 	}
 	}
