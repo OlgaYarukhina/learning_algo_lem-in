@@ -9,7 +9,7 @@ func GetSolution (n int, als [][][]*Cell) [][]*Cell {
 	bestSol = als[0]
 	h = calcHeight(n, als[0])
 	
-		for s := 1; s<len(als); s++ {        // s: all solutions      
+		for s := 1; s<len(als); s++ {          // s: all solutions      
 			eachsh := calcHeight(n, als[s])    // check height each solution 
 			if eachsh < h {
 				h = eachsh

@@ -20,18 +20,24 @@ func main(){
     var c []*functions.Cell
 	path := functions.AllPaths(start, end, c)
 
+
 	// 3. strategies
 	
 	allSollutions := functions.AllSolutions(path)
 
 	fmt.Println("All solution")
-			fmt.Println(allSollutions)
+	fmt.Println(allSollutions)
 
 	// 4. choose best solution
 
 	solPath := functions.GetSolution(n,allSollutions)
 	fmt.Println("Best solution")
-			fmt.Println(solPath)
+	fmt.Println(solPath)
+
+    // 5. Print
+
+	functions.Print(n, solPath)
+
 }
 
 

@@ -15,12 +15,6 @@ type Cell struct {
 }
 
 
-type AntHill struct {
-	Start *Cell
-	End   *Cell
-	Cells []Cell
-}
-
 func ReadFile() []string {
 
 	args := os.Args[1:]
@@ -110,3 +104,13 @@ func AddTunnels (c []Cell, t string) []Cell {
 }
 return c
 }
+
+
+
+
+/*
+type AntHill struct {
+	Start *Cell
+	End   *Cell
+	Cells []Cell
+}*/
