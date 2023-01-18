@@ -24,6 +24,9 @@ func main(){
 	
 	allSollutions := functions.AllSolutions(path)
 
+	fmt.Println("All solution")
+			fmt.Println(allSollutions)
+
 	// 4. choose best solution
 
 	solPath := functions.GetSolution(n,allSollutions)
