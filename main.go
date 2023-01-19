@@ -24,19 +24,18 @@ func main(){
 	// 3. strategies
 	
 	allSollutions := functions.AllSolutions(path)
-
-	fmt.Println("All solution")
+	fmt.Println("All solution:")
 	fmt.Println(allSollutions)
 
 	// 4. choose best solution
 
-	solPath := functions.GetSolution(n,allSollutions)
-	fmt.Println("Best solution")
+	solPath, height := functions.GetSolution(n,allSollutions)
+	fmt.Println("Best solution:")
 	fmt.Println(solPath)
 
     // 5. Print
 
-	functions.Print(n, solPath)
+	functions.Print(n, height, solPath)
 
 }
 

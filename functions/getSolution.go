@@ -1,7 +1,7 @@
 package functions
 
 
-func GetSolution (n int, als [][][]*Cell) [][]*Cell {
+func GetSolution (n int, als [][][]*Cell) ([][]*Cell, int) {
 
 	var bestSol [][]*Cell                   // arr of solution, it can be 2 the same
 	var h int                               // best solution h
@@ -20,7 +20,7 @@ func GetSolution (n int, als [][][]*Cell) [][]*Cell {
 				bestSol = als[s]
 				}
 			}
-		return bestSol
+		return bestSol, h
 	}
 
 
