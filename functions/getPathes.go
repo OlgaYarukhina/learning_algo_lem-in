@@ -1,9 +1,5 @@
 package functions
 
-import (
-	"fmt"
-)
-
 
 func AllPaths(s ,f *Cell, c []*Cell) ([][]*Cell){
 	var p, allp [][]*Cell
@@ -52,7 +48,6 @@ func AllSolutions(p [][]*Cell) ([][][]*Cell) {
 
      lable:
 		for r := w+1; r<len(allp); r++{ 
-			fmt.Println(r)
 			for k:=0; k<len(allp[r]); k++ {		
 				check = false 
 				for _, cell := range passedCelles {

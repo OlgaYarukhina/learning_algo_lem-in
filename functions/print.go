@@ -8,7 +8,50 @@ import (
 
 func Print (n, h int, s [][]*Cell) {
 	fmt.Println(h)
-    var slicAnts [][]string
+  //  var slicAnts [][]string
+
+	nAnts := n
+
+	var groups [][]string
+	
+
+
+	for g := len(s); g > 0; g-- {
+		var group []string           //group of ants in the same way
+		if g == 1 {
+			fmt.Println("Here1")
+			for a := 1; a <= nAnts; a++ {
+				aStr := strconv.Itoa(a)
+				str := "L" + aStr + "-" 
+				group = append(group, str)
+			}
+			groups = append(groups, group)
+
+		} else {
+			fmt.Println("Here2")
+			for a := (h-len(s[g-1])); a <= nAnts; a++ {
+				aStr := strconv.Itoa(a)
+				str := "L" + aStr + "-" 
+				group = append(group, str)
+			}
+			nAnts = nAnts - (h-len(s[g-1]))
+			groups = append(groups, group)
+		}
+		
+	}
+
+	fmt.Println(groups)
+
+}
+
+
+
+
+
+/*
+
+
+	//try 1
 
 	// create slice of ants in each path
 
@@ -43,7 +86,6 @@ func Print (n, h int, s [][]*Cell) {
 
 
 
-/*
 for i := 0; i < len(s); i++ {
 		nAnts := h - len(s[i])-1
 		 

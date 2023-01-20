@@ -19,19 +19,32 @@ func main(){
 
     var c []*functions.Cell
 	path := functions.AllPaths(start, end, c)
-
-
+	
 	// 3. strategies
 	
 	allSollutions := functions.AllSolutions(path)
 	fmt.Println("All solution:")
-	fmt.Println(allSollutions)
+	for _, r := range allSollutions {
+		fmt.Println("next")
+		for _, g := range r{
+			fmt.Println(g)
+		}
+		
+	}
 
 	// 4. choose best solution
 
 	solPath, height := functions.GetSolution(n,allSollutions)
 	fmt.Println("Best solution:")
 	fmt.Println(solPath)
+
+	for _, r := range solPath {
+		fmt.Println("next")
+		for _, g := range r{
+			fmt.Println(g)
+		}
+		
+	}
 
     // 5. Print
 
