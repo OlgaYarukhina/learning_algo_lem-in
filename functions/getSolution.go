@@ -1,5 +1,7 @@
 package functions
 
+import "fmt"
+
 
 func GetSolution (n int, als [][][]*Cell) ([][]*Cell, int) {
 
@@ -20,6 +22,8 @@ func GetSolution (n int, als [][][]*Cell) ([][]*Cell, int) {
 				bestSol = als[s]
 				}
 			}
+			fmt.Println("height:")
+		fmt.Println(h)
 		return bestSol, h
 	}
 
