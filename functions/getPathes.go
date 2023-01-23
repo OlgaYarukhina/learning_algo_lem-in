@@ -1,53 +1,33 @@
 package functions
 
-import "fmt"
-
-
-
 func AllPaths(s, f *Cell, c []*Cell) [][]*Cell {
-	var p, allp, allPP [][]*Cell                      // allPP  all pathes of 1 way
+	var result, allp, allPP [][]*Cell // allPP  all pathes of 1 way
 	var eachP []*Cell
 	eachP = c
 	eachP = append(eachP, s)
 
-	lable:
-	for i := 0; i < len(s.Tunnels); i++ {                         
+lable:
+	for i := 0; i < len(s.Tunnels); i++ {
 		eachPP := eachP
-
-		if s.Tunnels[i] == f {
-			
-			fmt.Println(("here4"))
-			fmt.Println(f)
+		if s.Tunnels[i].Name == f.Name {
 			eachPP = append(eachPP, s.Tunnels[i])
-		
-			fmt.Println("Eaaaachhh")
-			fmt.Println(eachPP)
-			fmt.Println("ALLLLL BEFORE:")
-			fmt.Println(allPP)
-			allPP = append(allPP, eachPP)
-			fmt.Println("ALLLLL:")
-			fmt.Println(allPP)
-
+			temp := make([]*Cell, len(eachPP))
+			copy(temp, eachPP)
+			allPP = append(allPP, temp)
 		} else {
 			for j := 0; j < len(eachP); j++ { //check if we have already been in that cell
 				if eachP[j] == s.Tunnels[i] {
-					fmt.Println(("here2"))
-					fmt.Println(eachP[j])
 				continue lable
 				}
 			}
-			fmt.Println(("here3"))
-			fmt.Println(s.Tunnels[i])
 			nextStep := AllPaths(s.Tunnels[i], f, eachP)
-
 			allp = append(allp, nextStep...)
 		}
-
 		allp = append(allp, allPP...)
-	}
 
-	p = append(p, allp...)
-	return p
+	}
+	result = append(result, allp...)
+	return result
 }
 
 func AllSolutions(p [][]*Cell) [][][]*Cell {
@@ -59,7 +39,6 @@ func AllSolutions(p [][]*Cell) [][][]*Cell {
 	for w := 0; w < (len(allp)); w++ {
 		var passedCelles []*Cell
 		var str [][]*Cell
-
 		str = append(str, allp[w])
 		sol = append(sol, str)
 
