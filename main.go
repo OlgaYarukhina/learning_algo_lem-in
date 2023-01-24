@@ -17,28 +17,27 @@ func main() {
 	// 2. create all possible pathes
 
 	var c []*functions.Cell
-	//var p []*functions.Cell
 	path := functions.AllPaths(start, end, c)
-
-	fmt.Println("All path:")
-
-	for _, r := range path {
-		fmt.Println("next")
-		for _, g := range r {
-
-			fmt.Println(g)
-
-		}
-	}
 
 	// 3. strategies
 
 	allSollutions := functions.AllSolutions(path)
 
+	fmt.Println("All sol:")
+
+	for _, r := range allSollutions {
+		fmt.Println("next")
+		for _, g := range r {
+			for _, K := range g {
+			fmt.Println(K)
+			}
+		}
+	}
+
 	// 4. choose best solution
 
 	solPath, height := functions.GetSolution(n, allSollutions)
-	//fmt.Println("Best solution:")
+	fmt.Println("Best solution:")
 	//fmt.Println(solPath)
 
 	for _, r := range solPath {

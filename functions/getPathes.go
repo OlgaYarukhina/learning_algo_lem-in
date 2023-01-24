@@ -1,5 +1,7 @@
 package functions
 
+import "sort"
+
 func AllPaths(s, f *Cell, c []*Cell) [][]*Cell {
 	var result, allp, allPP [][]*Cell // allPP  all pathes of 1 way
 	var eachP []*Cell
@@ -14,6 +16,7 @@ lable:
 			temp := make([]*Cell, len(eachPP))
 			copy(temp, eachPP)
 			allPP = append(allPP, temp)
+
 		} else {
 			for j := 0; j < len(eachP); j++ { //check if we have already been in that cell
 				if eachP[j] == s.Tunnels[i] {
@@ -30,18 +33,22 @@ lable:
 	return result
 }
 
+
 func AllSolutions(p [][]*Cell) [][][]*Cell {
 	var sol [][][]*Cell
 	var check bool
-
 	allp := p
+
+	sort.Slice(allp, func(i,j int) bool {
+		return len(allp [i]) < len(allp [j])
+	})
 
 	for w := 0; w < (len(allp)); w++ {
 		var passedCelles []*Cell
 		var str [][]*Cell
 		str = append(str, allp[w])
 		sol = append(sol, str)
-
+		
 		for _, allcell := range allp[w] {
 			passedCelles = append(passedCelles, allcell)
 		}
@@ -66,5 +73,7 @@ func AllSolutions(p [][]*Cell) [][][]*Cell {
 			}
 		}
 	}
+
+	
 	return sol
 }

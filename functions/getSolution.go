@@ -33,7 +33,7 @@ func GetSolution (n int, als [][][]*Cell) ([][]*Cell, int) {
 		h := 0
 
 		for i:= 0; i<len(eachS); i++ {
-				if len(eachS[i]) == 1 && len(eachS[i]) < h {
+				if len(eachS) == 1 && len(eachS[i]) < h {
 					h = len (eachS[i]) + n                 // height if only 1 path in the solution
 				} else {
 					highestP = len(eachS[0])               // the highest path in the solution
@@ -52,6 +52,7 @@ func GetSolution (n int, als [][][]*Cell) ([][]*Cell, int) {
 						}
 				}
 		}
+
 		return h
 	}
 

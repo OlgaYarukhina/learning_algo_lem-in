@@ -14,8 +14,6 @@ func Print (n, h int, s [][]*Cell) {
 
 	var groups [][]string
 	
-
-
 	for g := len(s); g > 0; g-- {
 		var group []string           //group of ants in the same way
 		if g == 1 {

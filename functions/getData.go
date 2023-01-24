@@ -33,7 +33,6 @@ func ReadFile() []string {
 	for scanner.Scan(){
 		scanLines = append(scanLines, scanner.Text())
 	}
-	
 	return scanLines //get lines
 }
 
