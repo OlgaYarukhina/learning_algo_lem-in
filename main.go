@@ -13,6 +13,7 @@ func main() {
 	getData := functions.ReadFile()
 	n, start, end, cells := functions.ParsData(getData)
 	fmt.Println(cells)
+	fmt.Println(start)
 
 	// 2. create all possible pathes
 
@@ -22,17 +23,6 @@ func main() {
 	// 3. strategies
 
 	allSollutions := functions.AllSolutions(path)
-
-	fmt.Println("All sol:")
-
-	for _, r := range allSollutions {
-		fmt.Println("next")
-		for _, g := range r {
-			for _, K := range g {
-			fmt.Println(K)
-			}
-		}
-	}
 
 	// 4. choose best solution
 
@@ -62,4 +52,15 @@ for _, r := range path {
 		}
 
 	}
+		fmt.Println("All sol:")
+
+	for _, r := range allSollutions {
+		fmt.Println("next")
+		for _, g := range r {
+			for _, K := range g {
+			fmt.Println(K)
+			}
+		}
+	}
+
 */
