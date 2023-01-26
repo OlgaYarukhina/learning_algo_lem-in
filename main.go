@@ -40,7 +40,7 @@ func main() {
 
 	// 5. Print
 
-	functions.Print(n, height, solPath)
+	functions.Run(n, height, solPath)
 
 }
 

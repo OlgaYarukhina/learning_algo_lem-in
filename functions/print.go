@@ -7,17 +7,15 @@ import (
 
 type Ants struct {
 	Name     string
+	Path     []*Cell
 	Position *Cell
 }
 
-func Print(n, h int, s [][]*Cell) {
-	fmt.Println(h)
-	//  var slicAnts [][]string
-
+func Run(n, h int, s [][]*Cell) {
 	nAnts := n
 
+	// 1. create teams in each path 
 	var groups [][]string
-
 	for g := 0; g < len(s); g++ {
 		var group []string //group of ants in the same way
 		if g == len(s)-1 {
@@ -25,7 +23,6 @@ func Print(n, h int, s [][]*Cell) {
 				aStr := strconv.Itoa(n - nAnts + a)
 				str := "L" + aStr + "-"
 				group = append(group, str)
-				//fmt.Println(group)
 			}
 		} else {
 			for a := 1; a <= h-len(s[g]); a++ {
@@ -34,28 +31,50 @@ func Print(n, h int, s [][]*Cell) {
 				group = append(group, str)
 			}
 			nAnts = nAnts - (h - len(s[g]))
-
 		}
 		groups = append(groups, group)
 	}
-
 	fmt.Println(groups)
 
-	// put ants into the start
+	// 2. put ants into the start
 
 	antsSprint := make([]Ants, n)
-
 	q := 0
 
 	for i := 0; i < len(groups); i++ {
 		for j := 0; j < len(groups[i]); j++ {
 			antsSprint[q].Name = groups[i][j]
-			antsSprint[q].Position = s[i][0]
+			antsSprint[q].Path = s[i]
+			antsSprint[q].Position = antsSprint[q].Path[0]
 			q++
 		}
-		
 	}
 	fmt.Println(antsSprint)
+
+	// 3. run!
+for s := 0; s < h; s++ {  // raw of printing
+
+	var pos []*Cell
+	for k := 0; k < len(antsSprint); k++ {
+		fmt.Println(k)
+		for l := 0; l < len(antsSprint[k].Path); l++ {
+			fmt.Println("Here")
+			fmt.Println(l)
+			if antsSprint[k].Path[l] == antsSprint[k].Position && l != len(antsSprint[k].Path)-1 {
+				antsSprint[k].Position = antsSprint[k].Path[l+1]
+				pos = append(pos, antsSprint[k].Path[l+1])
+			}
+		}
+		
+
+
+	}
+}
+
+}
+
+func print() {
+
 }
 
 /*
