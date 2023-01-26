@@ -45,6 +45,9 @@ func GetSolution (n int, als [][][]*Cell) ([][]*Cell, int) {
 						}
 					}
 					ht := (hAllPath + n)/len(eachS)           //height with ants
+					if (hAllPath + n)%len(eachS) > 0 {
+						ht = ht +1
+					} 
 						if ht > highestP {
 							h = ht
 						} else {

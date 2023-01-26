@@ -5,6 +5,11 @@ import (
 	"strconv"
 )
 
+type Ants struct {
+	Name   string
+	Position *Cell
+}
+
 
 func Print (n, h int, s [][]*Cell) {
 	fmt.Println(h)
@@ -14,31 +19,45 @@ func Print (n, h int, s [][]*Cell) {
 
 	var groups [][]string
 	
-	for g := len(s); g > 0; g-- {
+	for g := 0; g < len(s); g++ {
+		fmt.Println("Here")
+		fmt.Println(g)
 		var group []string           //group of ants in the same way
-		if g == 1 {
-			fmt.Println("Here1")
+		if g == len(s)-1 {
 			for a := 1; a <= nAnts; a++ {
-				aStr := strconv.Itoa(a)
+				fmt.Println("Here2")
+				aStr := strconv.Itoa(n-nAnts+a)
 				str := "L" + aStr + "-" 
 				group = append(group, str)
+				//fmt.Println(group)
 			}
-			groups = append(groups, group)
-
 		} else {
-			fmt.Println("Here2")
-			for a := (h-len(s[g-1])); a <= nAnts; a++ {
-				aStr := strconv.Itoa(a)
+			for a := 1; a <= h-len(s[g]); a++ {
+				fmt.Println("Here1")
+				fmt.Println(nAnts-len(s[g]))
+				aStr := strconv.Itoa(n-nAnts+a)
 				str := "L" + aStr + "-" 
 				group = append(group, str)
+				fmt.Println(group)
 			}
-			nAnts = nAnts - (h-len(s[g-1]))
-			groups = append(groups, group)
+			nAnts = nAnts - (h-len(s[g]))
+			fmt.Println(h-len(s[g]))
+			
 		}
-		
+		groups = append(groups, group)
 	}
 
 	fmt.Println(groups)
+
+	// put ants into the start
+
+	// start := new(Ants)
+
+	 for i:=0; i < len(groups); i++ {
+		for j := 0; j < len(groups[i]); j++ {
+
+		}
+	 }
 
 }
 
