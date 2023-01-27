@@ -19,13 +19,13 @@ func ReadFile() []string {
 
 	args := os.Args[1:]
 	if len(args) != 1 {
-		fmt.Println("Usage: go run . [exampleXX.txt]")
-		os.Exit(1)
+		fmt.Println("Usage: go run . example00.txt")
+		os.Exit(0)
 	}
 	d, err := os.Open("examples/" + args[0])
 	if err != nil {
-		fmt.Println("Can not read file", err)
-		os.Exit(1)
+		fmt.Println("Can not read file: no such file or directory")
+		os.Exit(0)
 	}
 	defer d.Close()
 
@@ -33,7 +33,7 @@ func ReadFile() []string {
 	var scanLines []string
 	for scanner.Scan() {
 		scanLines = append(scanLines, scanner.Text())
-		
+
 	}
 	return scanLines //get lines
 }
@@ -51,7 +51,7 @@ func ParsData(scan []string) (int, *Cell, *Cell) {
 		os.Exit(1)
 	}
 
-	regexpCells := regexp.MustCompile(`[\d\w]+\s*\d*\s*\d*`)
+	regexpCells := regexp.MustCompile(`[\d\w]+\s*[\d\w]*\s*[\d\w]*`)
 	regexpTunells := regexp.MustCompile(`(\S+)-(\S+)`)
 
 	for i := 1; i < len(scan); i++ {
@@ -59,21 +59,30 @@ func ParsData(scan []string) (int, *Cell, *Cell) {
 		foundTunells := regexpTunells.FindAllString(scan[i], -1)
 		if len(foundCells) > 0 && scan[i] == foundCells[0] {
 			l := strings.Split(scan[i], " ")
-			fmt.Println(l)
-			fmt.Println(len(l))
 			if len(l) != 3 {
 				fmt.Println("ERROR: invalid data format, check each cell coordinates")
 				os.Exit(0)
+			} else {
+				_, err1 := strconv.Atoi(l[1])
+				if err1 != nil {
+					fmt.Println("ERROR: invalid data format, check x coordinates")
+					os.Exit(0)
+				}
+				_, err2 := strconv.Atoi(l[2])
+				if err2 != nil {
+					fmt.Println("ERROR: invalid data format, check y coordinates")
+					os.Exit(0)
+				}
 			}
 			cell := Cell{Name: l[0]}
 			for _, check := range cellsArr {
 				if cell.Name == check.Name {
-					fmt.Println("ERROR: file contain duplicates cell")
+					fmt.Println("ERROR: invalid data format, file contains duplicated cell")
 					os.Exit(0)
 				}
 			}
 			cellsArr = append(cellsArr, cell)
-			
+
 			if scan[i-1] == "##start" {
 				l := strings.Split(scan[i], " ")
 				st = l[0]
@@ -103,8 +112,7 @@ func ParsData(scan []string) (int, *Cell, *Cell) {
 	} else if start == nil || end == nil {
 		fmt.Println("ERROR: no start or end")
 		os.Exit(0)
-	} 
-
+	}
 	return n, start, end
 }
 
@@ -112,7 +120,7 @@ func AddTunnels(c []Cell, t string) []Cell {
 	tn := strings.Split(t, "-")
 	w1, w2 := tn[0], tn[1]
 	if w1 == w2 {
-		fmt.Println("ERROR: invalid tunn")
+		fmt.Println("ERROR: invalid data format, invalid tunnel")
 		os.Exit(0)
 	}
 	for i := 0; i < len(c); i++ {
@@ -125,7 +133,7 @@ func AddTunnels(c []Cell, t string) []Cell {
 			}
 		}
 	}
-	
+
 	return c
 }
 
