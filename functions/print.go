@@ -16,7 +16,7 @@ func Run(n, h int, s [][]*Cell) {
 	nAnts := n
 
 	// 1. create teams in each path
-	
+
 	var groups [][]string
 	for g := 0; g < len(s); g++ {
 		var group []string //group of ants in the same way
@@ -55,14 +55,12 @@ func Run(n, h int, s [][]*Cell) {
 	// 3. run!
 
 	for s := 0; s < h; s++ { // raw of printing
-		pos := make([][]*Cell, len(groups))  // not empty cells
+		pos := make([][]*Cell, len(groups)) // not empty cells
 		var str, res string
- 
-		lable:
-			for k := 0; k < len(antsSprint); k++ {
-				
-				for p := 0; p < len(antsSprint[k].Path); p++ {
 
+	lable:
+		for k := 0; k < len(antsSprint); k++ {
+			for p := 0; p < len(antsSprint[k].Path); p++ {
 				if antsSprint[k].Path[p] == antsSprint[k].Position && p != len(antsSprint[k].Path)-1 {
 					for _, check := range pos[antsSprint[k].Id] {
 						if check == antsSprint[k].Path[p+1] {
@@ -74,7 +72,7 @@ func Run(n, h int, s [][]*Cell) {
 					str = antsSprint[k].Name + *&antsSprint[k].Position.Name + " "
 					res = res + str
 					continue lable
-					
+
 				} else if antsSprint[k].Path[p] == antsSprint[k].Position && p == len(antsSprint[k].Path)-1 {
 					continue lable
 				}
@@ -85,8 +83,6 @@ func Run(n, h int, s [][]*Cell) {
 		}
 	}
 }
-
-
 
 /*
 

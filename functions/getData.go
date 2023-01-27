@@ -47,11 +47,11 @@ func ParsData(scan []string) (int, *Cell, *Cell) {
 	nSt := scan[0]
 	n, err := strconv.Atoi(nSt)
 	if err != nil {
-		fmt.Println("ERROR: Invalid file format", err)
-		os.Exit(1)
+		fmt.Println("ERROR: Invalid file format. Put number of ants in first line")
+		os.Exit(0)
 	}
 
-	regexpCells := regexp.MustCompile(`[\d\w]+\s*[\d\w]*\s*[\d\w]*`)
+	regexpCells := regexp.MustCompile(`[\d\w]+\s+\S*\s*\S*`)
 	regexpTunells := regexp.MustCompile(`(\S+)-(\S+)`)
 
 	for i := 1; i < len(scan); i++ {
@@ -110,7 +110,7 @@ func ParsData(scan []string) (int, *Cell, *Cell) {
 		fmt.Println("ERROR: invalid data format, invalid number of Ants")
 		os.Exit(0)
 	} else if start == nil || end == nil {
-		fmt.Println("ERROR: no start or end")
+		fmt.Println("ERROR: invalid data format. Check if file contains ##start and ##end")
 		os.Exit(0)
 	}
 	return n, start, end
@@ -119,6 +119,22 @@ func ParsData(scan []string) (int, *Cell, *Cell) {
 func AddTunnels(c []Cell, t string) []Cell {
 	tn := strings.Split(t, "-")
 	w1, w2 := tn[0], tn[1]
+	var check1, check2 string
+	for _, checkTun := range c {
+		if checkTun.Name == w1 {
+			check1 = w1
+		}
+		if checkTun.Name == w2 {
+			check2 = w2
+		}
+	}
+
+	if check1 == "" || check2 == "" {
+		fmt.Println("ERROR: invalid data format, check tunnels")
+		os.Exit(0)
+	}
+
+
 	if w1 == w2 {
 		fmt.Println("ERROR: invalid data format, invalid tunnel")
 		os.Exit(0)

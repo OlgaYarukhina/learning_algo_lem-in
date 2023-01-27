@@ -73,7 +73,5 @@ func AllSolutions(p [][]*Cell) [][][]*Cell {
 			}
 		}
 	}
-
-	
 	return sol
 }
