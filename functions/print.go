@@ -10,16 +10,28 @@ type Ants struct {
 	Path     []*Cell
 	Position *Cell
 }
+type Ants struct {
+	Name     string
+	Path     []*Cell
+	Position *Cell
+}
 
+func Run(n, h int, s [][]*Cell) {
 func Run(n, h int, s [][]*Cell) {
 	nAnts := n
 
+	// 1. create teams in each path 
 	// 1. create teams in each path 
 	var groups [][]string
 	for g := 0; g < len(s); g++ {
 		var group []string //group of ants in the same way
 		if g == len(s)-1 {
+	for g := 0; g < len(s); g++ {
+		var group []string //group of ants in the same way
+		if g == len(s)-1 {
 			for a := 1; a <= nAnts; a++ {
+				aStr := strconv.Itoa(n - nAnts + a)
+				str := "L" + aStr + "-"
 				aStr := strconv.Itoa(n - nAnts + a)
 				str := "L" + aStr + "-"
 				group = append(group, str)
@@ -28,10 +40,15 @@ func Run(n, h int, s [][]*Cell) {
 			for a := 1; a <= h-len(s[g]); a++ {
 				aStr := strconv.Itoa(n - nAnts + a)
 				str := "L" + aStr + "-"
+			for a := 1; a <= h-len(s[g]); a++ {
+				aStr := strconv.Itoa(n - nAnts + a)
+				str := "L" + aStr + "-"
 				group = append(group, str)
 			}
 			nAnts = nAnts - (h - len(s[g]))
+			nAnts = nAnts - (h - len(s[g]))
 		}
+		groups = append(groups, group)
 		groups = append(groups, group)
 	}
 	fmt.Println(groups)
@@ -72,9 +89,12 @@ for s := 0; s < h; s++ {  // raw of printing
 }
 
 }
+}
 
 func print() {
+func print() {
 
+}
 }
 
 /*
@@ -89,16 +109,20 @@ func print() {
 
 	for i := 0; i < len(s); i++ {
 		nAnts := h - len(s[i])                                   // number of ant in start of each way
+		nAnts := h - len(s[i])                                   // number of ant in start of each way
 		slicAnts = append(slicAnts, slice(sAnt, nAnts, s[i]))
+		sAnt = h-len(s)                                          // number of ants in path
 		sAnt = h-len(s)                                          // number of ants in path
 	}
 
 	fmt.Println(slicAnts)
 }
+}
 
 
 	// create slice of ants in each path
 
+	func slice (s, n int, p []*Cell) []string {
 	func slice (s, n int, p []*Cell) []string {
 		var pStr [] string
 		var str string                        // startN number of ant in start of each way
@@ -119,18 +143,24 @@ for i := 0; i < len(s); i++ {
 		nAnts := h - len(s[i])-1
 
 
+
+
 		for j := 1; i < len(s[i]); j++ {
 
 			len(s[i])
+
 
 
 			if nAnts > 0 {
 			fmt.Print("L",n,"-",*&s[0][j].Name," ")
 			}
 
+
 		}
 
+
 	}
+
 
 	// try 1
 
@@ -142,12 +172,18 @@ for i := 0; i < len(s); i++ {
 		for j := 0; j < len(s); j++ {    // number of path (2)
 			if
 
+			if
+
 			n1 := h - len(s[j])
 		}
+
 
 	}
 
 
 
+
+
+*/
 
 */
