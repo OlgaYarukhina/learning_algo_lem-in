@@ -6,32 +6,22 @@ import (
 )
 
 type Ants struct {
-	Name     string
-	Path     []*Cell
-	Position *Cell
-}
-type Ants struct {
+	Id       int
 	Name     string
 	Path     []*Cell
 	Position *Cell
 }
 
-func Run(n, h int, s [][]*Cell) {
 func Run(n, h int, s [][]*Cell) {
 	nAnts := n
 
-	// 1. create teams in each path 
-	// 1. create teams in each path 
+	// 1. create teams in each path
+	
 	var groups [][]string
 	for g := 0; g < len(s); g++ {
 		var group []string //group of ants in the same way
 		if g == len(s)-1 {
-	for g := 0; g < len(s); g++ {
-		var group []string //group of ants in the same way
-		if g == len(s)-1 {
 			for a := 1; a <= nAnts; a++ {
-				aStr := strconv.Itoa(n - nAnts + a)
-				str := "L" + aStr + "-"
 				aStr := strconv.Itoa(n - nAnts + a)
 				str := "L" + aStr + "-"
 				group = append(group, str)
@@ -40,18 +30,12 @@ func Run(n, h int, s [][]*Cell) {
 			for a := 1; a <= h-len(s[g]); a++ {
 				aStr := strconv.Itoa(n - nAnts + a)
 				str := "L" + aStr + "-"
-			for a := 1; a <= h-len(s[g]); a++ {
-				aStr := strconv.Itoa(n - nAnts + a)
-				str := "L" + aStr + "-"
 				group = append(group, str)
 			}
 			nAnts = nAnts - (h - len(s[g]))
-			nAnts = nAnts - (h - len(s[g]))
 		}
 		groups = append(groups, group)
-		groups = append(groups, group)
 	}
-	fmt.Println(groups)
 
 	// 2. put ants into the start
 
@@ -60,42 +44,49 @@ func Run(n, h int, s [][]*Cell) {
 
 	for i := 0; i < len(groups); i++ {
 		for j := 0; j < len(groups[i]); j++ {
+			antsSprint[q].Id = i
 			antsSprint[q].Name = groups[i][j]
 			antsSprint[q].Path = s[i]
 			antsSprint[q].Position = antsSprint[q].Path[0]
 			q++
 		}
 	}
-	fmt.Println(antsSprint)
 
 	// 3. run!
-for s := 0; s < h; s++ {  // raw of printing
+	
+	for s := 0; s < h; s++ { // raw of printing
+		pos := make([][]*Cell, len(groups))  // not empty cells
+		var str, res string
+ 
+		lable:
+			for k := 0; k < len(antsSprint); k++ {
+				
+				for p := 0; p < len(antsSprint[k].Path); p++ {
 
-	var pos []*Cell
-	for k := 0; k < len(antsSprint); k++ {
-		fmt.Println(k)
-		for l := 0; l < len(antsSprint[k].Path); l++ {
-			fmt.Println("Here")
-			fmt.Println(l)
-			if antsSprint[k].Path[l] == antsSprint[k].Position && l != len(antsSprint[k].Path)-1 {
-				antsSprint[k].Position = antsSprint[k].Path[l+1]
-				pos = append(pos, antsSprint[k].Path[l+1])
+				if antsSprint[k].Path[p] == antsSprint[k].Position && p != len(antsSprint[k].Path)-1 {
+					for _, check := range pos[antsSprint[k].Id] {
+						if check == antsSprint[k].Path[p+1] {
+							continue lable
+						}
+					}
+					antsSprint[k].Position = antsSprint[k].Path[p+1]
+					pos[antsSprint[k].Id] = append(pos[antsSprint[k].Id], antsSprint[k].Position)
+					str = antsSprint[k].Name + *&antsSprint[k].Position.Name + " "
+					res = res + str
+					continue lable
+					
+				} else if antsSprint[k].Path[p] == antsSprint[k].Position && p == len(antsSprint[k].Path)-1 {
+					continue lable
+				}
 			}
 		}
-		
-///
-
+		if res != "" {
+			fmt.Println(res)
+		}
 	}
 }
 
-}
-}
 
-func print() {
-func print() {
-
-}
-}
 
 /*
 
@@ -109,20 +100,16 @@ func print() {
 
 	for i := 0; i < len(s); i++ {
 		nAnts := h - len(s[i])                                   // number of ant in start of each way
-		nAnts := h - len(s[i])                                   // number of ant in start of each way
 		slicAnts = append(slicAnts, slice(sAnt, nAnts, s[i]))
-		sAnt = h-len(s)                                          // number of ants in path
 		sAnt = h-len(s)                                          // number of ants in path
 	}
 
 	fmt.Println(slicAnts)
 }
-}
 
 
 	// create slice of ants in each path
 
-	func slice (s, n int, p []*Cell) []string {
 	func slice (s, n int, p []*Cell) []string {
 		var pStr [] string
 		var str string                        // startN number of ant in start of each way
@@ -143,24 +130,18 @@ for i := 0; i < len(s); i++ {
 		nAnts := h - len(s[i])-1
 
 
-
-
 		for j := 1; i < len(s[i]); j++ {
 
 			len(s[i])
-
 
 
 			if nAnts > 0 {
 			fmt.Print("L",n,"-",*&s[0][j].Name," ")
 			}
 
-
 		}
 
-
 	}
-
 
 	// try 1
 
@@ -172,18 +153,12 @@ for i := 0; i < len(s); i++ {
 		for j := 0; j < len(s); j++ {    // number of path (2)
 			if
 
-			if
-
 			n1 := h - len(s[j])
 		}
-
 
 	}
 
 
 
-
-
-*/
 
 */

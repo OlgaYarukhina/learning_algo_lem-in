@@ -1,8 +1,5 @@
 package functions
 
-import "fmt"
-
-
 func GetSolution (n int, als [][][]*Cell) ([][]*Cell, int) {
 
 	var bestSol [][]*Cell                   // arr of solution, it can be 2 the same
@@ -22,8 +19,6 @@ func GetSolution (n int, als [][][]*Cell) ([][]*Cell, int) {
 				bestSol = als[s]
 				}
 			}
-			fmt.Println("height:")
-		fmt.Println(h)
 		return bestSol, h
 	}
 
@@ -54,16 +49,5 @@ func GetSolution (n int, als [][][]*Cell) ([][]*Cell, int) {
 						}
 				}
 		}
-
 		return h
 	}
-
-
-	/*
-	 srtd := als
-	sort.Slice(srtd, func(i, j int) bool {
-		return len(srtd[i]) < len(srtd[j])
-		
-	})
-
-	*/

@@ -32,11 +32,16 @@ func ReadFile() []string {
 	var scanLines []string
 	for scanner.Scan() {
 		scanLines = append(scanLines, scanner.Text())
+		
 	}
+	for i := 0; i < len(scanLines); i++ {
+			fmt.Println(scanLines[i])
+	}
+	fmt.Println()
 	return scanLines //get lines
 }
 
-func ParsData(scan []string) (int, *Cell, *Cell, []Cell) {
+func ParsData(scan []string) (int, *Cell, *Cell) {
 	var allCells []Cell
 	var start, end *Cell
 	var cellsArr []Cell
@@ -82,8 +87,7 @@ func ParsData(scan []string) (int, *Cell, *Cell, []Cell) {
 			end = &cellsArr[i]
 		}
 	}
-
-	return n, start, end, cellsArr
+	return n, start, end
 }
 
 func AddTunnels(c []Cell, t string) []Cell {
