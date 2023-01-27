@@ -25,6 +25,7 @@ func ReadFile() []string {
 	d, err := os.Open("examples/" + args[0])
 	if err != nil {
 		fmt.Println("Can not read file", err)
+		os.Exit(1)
 	}
 	defer d.Close()
 
@@ -34,10 +35,6 @@ func ReadFile() []string {
 		scanLines = append(scanLines, scanner.Text())
 		
 	}
-	for i := 0; i < len(scanLines); i++ {
-			fmt.Println(scanLines[i])
-	}
-	fmt.Println()
 	return scanLines //get lines
 }
 
@@ -50,7 +47,7 @@ func ParsData(scan []string) (int, *Cell, *Cell) {
 	nSt := scan[0]
 	n, err := strconv.Atoi(nSt)
 	if err != nil {
-		fmt.Println("Invalid file format", err)
+		fmt.Println("ERROR: Invalid file format", err)
 		os.Exit(1)
 	}
 
@@ -87,12 +84,23 @@ func ParsData(scan []string) (int, *Cell, *Cell) {
 			end = &cellsArr[i]
 		}
 	}
+	if n == 0 || n > 10000 {
+		fmt.Println("ERROR: invalid data format, invalid number of Ants")
+		os.Exit(0)
+	} else if start == nil || end == nil {
+		fmt.Println("ERROR: no start or end")
+		os.Exit(0)
+	} 
 	return n, start, end
 }
 
 func AddTunnels(c []Cell, t string) []Cell {
 	tn := strings.Split(t, "-")
 	w1, w2 := tn[0], tn[1]
+	if w1 == w2 {
+		fmt.Println("ERROR: invalid tunn")
+		os.Exit(0)
+	}
 	for i := 0; i < len(c); i++ {
 		if c[i].Name == w1 {
 			for j := 0; j < len(c); j++ {
@@ -103,6 +111,7 @@ func AddTunnels(c []Cell, t string) []Cell {
 			}
 		}
 	}
+	
 	return c
 }
 

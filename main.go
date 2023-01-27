@@ -1,7 +1,8 @@
 package main
 
 import (
-	
+	"fmt"
+
 	"01.kood.tech/git/oyarukhi/lem-in/functions"
 )
 
@@ -26,12 +27,14 @@ func main() {
 	solPath, height := functions.GetSolution(n, allSollutions)
 
 	// 5. print
-
+	//5.1. print file data
+	for i := 0; i < len(getData); i++ {
+		fmt.Println(getData[i])
+	}
+	fmt.Println()
 	functions.Run(n, height, solPath)
 
 }
-
-
 
 /*
 

@@ -1,9 +1,9 @@
 ## LEM-IN
 
-## Author
+### Author
 [Olha Yarukhina](https://01.kood.tech/git/oyarukhi)
 
-## Running the program
+### Running the program
 1. Run in terminal: 
 `go run . example00.txt` (all examples in folder "examples")
 2. [Check here if result correct](https://github.com/01-edu/public/tree/master/subjects/lem-in/audit)
