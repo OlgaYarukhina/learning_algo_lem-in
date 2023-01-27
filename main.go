@@ -33,7 +33,6 @@ func main() {
 	}
 	fmt.Println()
 	functions.Run(n, height, solPath)
-
 }
 
 /*
