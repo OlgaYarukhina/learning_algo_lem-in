@@ -53,7 +53,7 @@ func Run(n, h int, s [][]*Cell) {
 	}
 
 	// 3. run!
-	
+
 	for s := 0; s < h; s++ { // raw of printing
 		pos := make([][]*Cell, len(groups))  // not empty cells
 		var str, res string
@@ -90,7 +90,6 @@ func Run(n, h int, s [][]*Cell) {
 
 /*
 
-
 	//try 1
 
 	// create slice of ants in each path
@@ -122,7 +121,6 @@ func Run(n, h int, s [][]*Cell) {
 	}
 	return pStr
 }
-
 
 
 
