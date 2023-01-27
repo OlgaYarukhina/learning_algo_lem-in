@@ -27,7 +27,6 @@ func GetSolution (n int, als [][][]*Cell) ([][]*Cell, int) {
 		return bestSol, h
 	}
 
-
 	func calcHeight (n int, eachS [][]*Cell) int {
 		var highestP int
 		h := 0
