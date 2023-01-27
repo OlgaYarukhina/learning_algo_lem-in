@@ -23,6 +23,36 @@ func main() {
 
 	allSollutions := functions.AllSolutions(path)
 
+	// 4. choose best solution
+
+	solPath := functions.GetSolution(n, allSollutions)
+	fmt.Println("Best solution:")
+	//fmt.Println(solPath)
+
+	for _, r := range solPath {
+		fmt.Println("next")
+		for _, g := range r {
+			fmt.Printf("%#+v\n", g.Tunnels)
+		}
+	}
+
+	// 5. Print
+	// functions.Print(n, height, solPath)
+
+}
+
+
+
+/*
+for _, r := range path {
+		fmt.Println("next")
+		for _, g := range r{
+			fmt.Println(g)
+		}
+
+	}
+
+
 	fmt.Println("All sol:")
 
 	for _, r := range allSollutions {
@@ -34,32 +64,4 @@ func main() {
 		}
 	}
 
-	// 4. choose best solution
-
-	solPath, height := functions.GetSolution(n, allSollutions)
-	fmt.Println("Best solution:")
-	//fmt.Println(solPath)
-
-	for _, r := range solPath {
-		fmt.Println("next")
-		for _, g := range r {
-			fmt.Println(g)
-		}
-
-	}
-
-	// 5. Print
-
-	functions.Print(n, height, solPath)
-
-}
-
-/*
-for _, r := range path {
-		fmt.Println("next")
-		for _, g := range r{
-			fmt.Println(g)
-		}
-
-	}
 */

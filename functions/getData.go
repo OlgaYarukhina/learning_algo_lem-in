@@ -10,11 +10,11 @@ import (
 )
 
 type Cell struct {
-	Name   string
-	Tunnels [] *Cell
+	Name    string // 1234
+	Tunnels []*Cell
 }
 
-
+//1. create Cells with tunnels
 func ReadFile() []string {
 
 	args := os.Args[1:]
@@ -30,17 +30,17 @@ func ReadFile() []string {
 
 	scanner := bufio.NewScanner(d)
 	var scanLines []string
-	for scanner.Scan(){
+	for scanner.Scan() {
 		scanLines = append(scanLines, scanner.Text())
 	}
 	return scanLines //get lines
 }
 
-func ParsData (scan []string) (int, *Cell, *Cell, []Cell) {
+func ParsData(scan []string) (int, *Cell, *Cell, []Cell) {
 	var allCells []Cell
 	var start, end *Cell
 	var cellsArr []Cell
-	var tunArr [] string
+	var tunArr []string
 	var st, fn string
 	nSt := scan[0]
 	n, err := strconv.Atoi(nSt)
@@ -51,25 +51,24 @@ func ParsData (scan []string) (int, *Cell, *Cell, []Cell) {
 
 	regexpCells := regexp.MustCompile(`(\S+)\s(\d+\s\d+)`)
 	regexpTunells := regexp.MustCompile(`(\S+)-(\S+)`)
-	
 
-	for i:=1; i < len(scan); i++ {
+	for i := 1; i < len(scan); i++ {
 		foundCells := regexpCells.FindAllString(scan[i], -1)
 		foundTunells := regexpTunells.FindAllString(scan[i], -1)
-		if len(foundCells)>0 && scan[i] == foundCells[0] {
+		if len(foundCells) > 0 && scan[i] == foundCells[0] {
 			l := strings.Split(scan[i], " ")
 			cell := Cell{Name: l[0]}
 			cellsArr = append(cellsArr, cell)
-			if scan[i-1] == "##start"{
+			if scan[i-1] == "##start" {
 				l := strings.Split(scan[i], " ")
 				st = l[0]
 			} else if scan[i-1] == "##end" {
 				l := strings.Split(scan[i], " ")
 				fn = l[0]
-			} 
-		} else if len(foundTunells)>0 && scan[i] == foundTunells[0] {
+			}
+		} else if len(foundTunells) > 0 && scan[i] == foundTunells[0] {
 			tunArr = append(tunArr, scan[i])
-		} 
+		}
 	}
 	for _, each := range tunArr { //add tunnels
 		allCells = AddTunnels(cellsArr, each)
@@ -87,29 +86,25 @@ func ParsData (scan []string) (int, *Cell, *Cell, []Cell) {
 	return n, start, end, cellsArr
 }
 
-	
-func AddTunnels (c []Cell, t string) []Cell {
+func AddTunnels(c []Cell, t string) []Cell {
 	tn := strings.Split(t, "-")
-		w1, w2:= tn[0], tn[1]
-	for i:=0; i<len(c); i++ {
+	w1, w2 := tn[0], tn[1]
+	for i := 0; i < len(c); i++ {
 		if c[i].Name == w1 {
-		for j:=0; j<len(c); j++ {
-			if c[j].Name == w2 {
-				c[i].Tunnels = append(c[i].Tunnels, &c[j])
-				c[j].Tunnels = append(c[j].Tunnels, &c[i])
+			for j := 0; j < len(c); j++ {
+				if c[j].Name == w2 {
+					c[i].Tunnels = append(c[i].Tunnels, &c[j])
+					c[j].Tunnels = append(c[j].Tunnels, &c[i])
+				}
 			}
 		}
 	}
+	return c
 }
-return c
-}
-
-
-
 
 /*
 type AntHill struct {
-	Start *Cell
-	End   *Cell
-	Cells []Cell
+Start *Cell
+End   *Cell
+Cells []Cell
 }*/

@@ -3,7 +3,7 @@ package functions
 import "fmt"
 
 
-func GetSolution (n int, als [][][]*Cell) ([][]*Cell, int) {
+func GetSolution (n int, als [][][]*Cell) ([][]*Cell) {
 
 	var bestSol [][]*Cell                   // arr of solution, it can be 2 the same
 	var h int                               // best solution h
@@ -24,7 +24,7 @@ func GetSolution (n int, als [][][]*Cell) ([][]*Cell, int) {
 			}
 			fmt.Println("height:")
 		fmt.Println(h)
-		return bestSol, h
+		return bestSol
 	}
 
 
