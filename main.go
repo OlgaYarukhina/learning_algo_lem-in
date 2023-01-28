@@ -27,16 +27,18 @@ func main() {
 	solPath, height := functions.GetSolution(n, allSollutions)
 
 	// 5. print
+
 	//5.1. print file data
 	for i := 0; i < len(getData); i++ {
 		fmt.Println(getData[i])
 	}
 	fmt.Println()
+
+	//5.2. print results
 	functions.Run(n, height, solPath)
 }
 
 /*
-
 	for _, r := range allSollutions {
 		fmt.Println("next")
 		for _, g := range r {
